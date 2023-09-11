@@ -15,7 +15,7 @@ const Game = ({ username, roomId }: GameProps) => {
 
   // Local state to use for the UI
   const [guess, setGuess] = useState<string>("");
-
+  const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
   // Indicated that the game is loading
   if (gameState === null) {
     return (
@@ -35,13 +35,15 @@ const Game = ({ username, roomId }: GameProps) => {
     console.log({ type: "guess", guess: guess });
     dispatch({ type: "guess", guess: guess });
   };
-
+  const handleInputSubmitClick = () => {
+    setAccumulatedGuess(accumulatedGuess + guess);
+  };
   return (
     <>
       <h1 className="text-2xl border-b border-yellow-400 text-center relative">
         🎲 Guess the letter or the whole word!
       </h1>
-      <Word gameState={gameState} />
+      <Word gameState={gameState} guess={accumulatedGuess} />
       <section>
         <form
           className="flex flex-col gap-4 py-6 items-center"
@@ -61,7 +63,10 @@ const Game = ({ username, roomId }: GameProps) => {
             onChange={(e) => setGuess(e.currentTarget.value)}
             value={guess}
           />
-          <button className="rounded border p-5 bg-yellow-400 group text-black shadow hover:shadow-lg transition-all duration-200 hover:animate-wiggle">
+          <button
+            onClick={handleInputSubmitClick}
+            className="rounded border p-5 bg-yellow-400 group text-black shadow hover:shadow-lg transition-all duration-200 hover:animate-wiggle"
+          >
             Guess!
           </button>
         </form>
