@@ -115,6 +115,17 @@ export const gameUpdater = (
             state.log
           ),
         };
+      } else if (
+        action.guess.length != 1 ||
+        action.guess.length != state.target.length
+      ) {
+        return {
+          ...state,
+          log: addLog(
+            `user ${action.user.id} violated rules of the game! You can submit one letter or the whole word only.`,
+            state.log
+          ),
+        };
       } else {
         return {
           ...state,
