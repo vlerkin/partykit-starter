@@ -107,6 +107,14 @@ export const gameUpdater = (
           ...state,
           turn: state.turn - 1,
         };
+      } else if (state.turn == 0) {
+        return {
+          ...state,
+          log: addLog(
+            `user ${action.user.id} used the last attempt, you all LOST`,
+            state.log
+          ),
+        };
       } else {
         return {
           ...state,

@@ -12,31 +12,11 @@ const Game = ({ username, roomId }: GameProps) => {
   const { gameState, dispatch } = useGameRoom(username, roomId);
   const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
 
-  useEffect(() => {
-    console.log("New State:");
-    console.log({ gameState });
-    console.log(gameState?.turn);
-  }, [gameState]);
-
   const targetWord = gameState?.target;
   const attempts = gameState?.turn;
 
   // Local state to use for the UI
   const [guess, setGuess] = useState<string>("");
-
-  // useEffect(() => {
-  //   console.log("TARGET", targetWord);
-  //   console.log("acc", accumulatedGuess);
-  //   console.log("LAST LETTER", accumulatedGuess[accumulatedGuess.length - 1]);
-
-  //   if (attempts) {
-  //     if (targetWord?.includes(accumulatedGuess[accumulatedGuess.length - 1])) {
-  //       attempts;
-  //     } else {
-  //       attempts - 1;
-  //     }
-  //   }
-  // }, [accumulatedGuess]);
 
   // Indicated that the game is loading
   if (gameState === null) {
