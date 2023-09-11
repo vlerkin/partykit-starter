@@ -4,7 +4,7 @@ import { GameState, Action } from "../../game/logic";
 
 function Word({ gameState, guess }: { gameState: GameState; guess: string }) {
   const [word, setWord] = useState("");
-  console.log(word);
+
   useEffect(() => {
     setWord(gameState.target);
   }, []);

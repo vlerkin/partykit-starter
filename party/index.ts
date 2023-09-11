@@ -44,6 +44,7 @@ export default class Server implements Party.Server {
     };
     console.log(`Received action ${action.type} from user ${sender.id}`);
     this.gameState = gameUpdater(action, this.gameState);
+    console.log(this.gameState.turn);
     this.party.broadcast(JSON.stringify(this.gameState));
   }
 }

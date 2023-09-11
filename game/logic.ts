@@ -39,6 +39,7 @@ export type DefaultAction = { type: "UserEntered" } | { type: "UserExit" };
 // This interface holds all the information about your game
 export interface GameState extends BaseGameState {
   target: string;
+  turn: number;
 }
 
 // This is how a fresh new game starts out, it's a function so you can make it dynamic!
@@ -48,6 +49,7 @@ export const initialGame = () => ({
   target:
     hangmanGame[Math.floor(Math.random() * 30) as keyof typeof hangmanGame],
   log: addLog("Game Created!", []),
+  turn: 5,
 });
 
 // Here are all the actions we can dispatch for a user
@@ -78,9 +80,16 @@ export const gameUpdater = (
         users: state.users.filter((user) => user.id !== action.user.id),
         log: addLog(`user ${action.user.id} left 😢`, state.log),
       };
+    // case "guess":
+    //   if (!state.target.includes(action.guess)) {
+    //     return {
+    //       ...state,
+    //       turn: state.turn - 1,
+    //     };
+    //   }
 
     case "guess":
-      console.log("target:", state.target);
+      // If User guesses the target word
       if (action.guess === state.target) {
         return {
           ...state,
@@ -89,9 +98,14 @@ export const gameUpdater = (
           //     Math.floor(Math.random() * 30) as keyof typeof hangmanGame
           //   ],
           log: addLog(
-            `user ${action.user.id} guessed ${action.guess} and won!👑`,
+            `user ${action.user.id} guessed ${action.guess} and .won!👑`,
             state.log
           ),
+        };
+      } else if (!state.target.includes(action.guess)) {
+        return {
+          ...state,
+          turn: state.turn - 1,
         };
       } else {
         return {

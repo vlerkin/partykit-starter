@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useGameRoom } from "@/hooks/useGameRoom";
 import Word from "./Word";
@@ -10,12 +10,34 @@ interface GameProps {
 
 const Game = ({ username, roomId }: GameProps) => {
   const { gameState, dispatch } = useGameRoom(username, roomId);
-  console.log("Initial Gamestate");
-  console.log({ gameState });
+  const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
+
+  useEffect(() => {
+    console.log("New State:");
+    console.log({ gameState });
+    console.log(gameState?.turn);
+  }, [gameState]);
+
+  const targetWord = gameState?.target;
+  const attempts = gameState?.turn;
 
   // Local state to use for the UI
   const [guess, setGuess] = useState<string>("");
-  const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
+
+  // useEffect(() => {
+  //   console.log("TARGET", targetWord);
+  //   console.log("acc", accumulatedGuess);
+  //   console.log("LAST LETTER", accumulatedGuess[accumulatedGuess.length - 1]);
+
+  //   if (attempts) {
+  //     if (targetWord?.includes(accumulatedGuess[accumulatedGuess.length - 1])) {
+  //       attempts;
+  //     } else {
+  //       attempts - 1;
+  //     }
+  //   }
+  // }, [accumulatedGuess]);
+
   // Indicated that the game is loading
   if (gameState === null) {
     return (
@@ -32,18 +54,20 @@ const Game = ({ username, roomId }: GameProps) => {
     event.preventDefault();
     // Dispatch allows you to send an action!
     // Modify /game/logic.ts to change what actions you can send
-    console.log({ type: "guess", guess: guess });
+    // console.log({ type: "guess", guess: guess });
     dispatch({ type: "guess", guess: guess });
   };
   const handleInputSubmitClick = () => {
-    setAccumulatedGuess(accumulatedGuess + guess);
+    setAccumulatedGuess(accumulatedGuess.concat(guess));
   };
+
   return (
     <>
       <h1 className="text-2xl border-b border-yellow-400 text-center relative">
         🎲 Guess the letter or the whole word!
       </h1>
       <Word gameState={gameState} guess={accumulatedGuess} />
+      {attempts}
       <section>
         <form
           className="flex flex-col gap-4 py-6 items-center"
