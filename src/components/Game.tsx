@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useGameRoom } from "@/hooks/useGameRoom";
 import Word from "./Word";
+import StarRating from "./StarAttempts";
 
 interface GameProps {
   username: string;
@@ -47,7 +48,13 @@ const Game = ({ username, roomId }: GameProps) => {
         🎲 Guess the letter or the whole word!
       </h1>
       <Word gameState={gameState} guess={accumulatedGuess} />
-      {attempts}
+      <StarRating
+        attempts={gameState.turn}
+        maxAttempts={5}
+        height={20}
+        width={20}
+        className="flex flex-row"
+      />
       <section>
         <form
           className="flex flex-col gap-4 py-6 items-center"
@@ -71,7 +78,7 @@ const Game = ({ username, roomId }: GameProps) => {
             onClick={handleInputSubmitClick}
             disabled={gameState.turn == 0}
             className={`rounded border p-5 bg-yellow-400 group text-black shadow hover:shadow-lg transition-all duration-200 hover:animate-wiggle ${
-              gameState.turn == 0 && "hover:cursor-not-allowed"
+              gameState.turn === 0 && "hover:cursor-not-allowed"
             }`}
           >
             Guess!
