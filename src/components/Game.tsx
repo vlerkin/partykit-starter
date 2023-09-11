@@ -69,7 +69,10 @@ const Game = ({ username, roomId }: GameProps) => {
           />
           <button
             onClick={handleInputSubmitClick}
-            className="rounded border p-5 bg-yellow-400 group text-black shadow hover:shadow-lg transition-all duration-200 hover:animate-wiggle"
+            disabled={gameState.turn == 0}
+            className={`rounded border p-5 bg-yellow-400 group text-black shadow hover:shadow-lg transition-all duration-200 hover:animate-wiggle ${
+              gameState.turn == 0 && "hover:cursor-not-allowed"
+            }`}
           >
             Guess!
           </button>
