@@ -143,26 +143,19 @@ const Game = ({ username, roomId, setSetup }: GameProps) => {
               </p>
             );
           })}
-          <div>
-            <button
-              className="bg-black text-white py-[2px] px-2 mr-2"
-              onClick={() => initialGame()}
-            >
-              Start new game
-            </button>
-            <button
-              className="bg-black text-white py-[2px] px-2"
-              onClick={() =>
-                setSetup({
-                  username: null,
-                  roomId: null,
-                  showGame: false,
-                })
-              }
-            >
-              Quit the room
-            </button>
-          </div>
+
+          <button
+            className="bg-black text-white py-[2px] px-2"
+            onClick={() =>
+              setSetup({
+                username: null,
+                roomId: null,
+                showGame: false,
+              })
+            }
+          >
+            Quit the room
+          </button>
         </div>
       </section>
     </>

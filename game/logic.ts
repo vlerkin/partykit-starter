@@ -80,19 +80,9 @@ export const gameUpdater = (
         users: state.users.filter((user) => user.id !== action.user.id),
         log: addLog(`user ${action.user.id} left 😢`, state.log),
       };
-    // case "guess":
-    //   if (!state.target.includes(action.guess)) {
-    //     return {
-    //       ...state,
-    //       turn: state.turn - 1,
-    //     };
-    //   }
-
     case "guess":
-      console.log("HELLO");
       // If User guesses the target word
       if (action.guess === state.target) {
-        console.log("1");
         return {
           ...state,
           log: addLog(
@@ -104,7 +94,6 @@ export const gameUpdater = (
         action.guess.length !== 1 &&
         action.guess.length !== state.target.length
       ) {
-        console.log("GUESS FROM USER", action.guess.length, action.guess);
         return {
           ...state,
           log: addLog(
@@ -113,7 +102,6 @@ export const gameUpdater = (
           ),
         };
       } else if (state.turn === 0) {
-        console.log("3");
         return {
           ...state,
           log: addLog(
@@ -125,7 +113,6 @@ export const gameUpdater = (
         action.guess.length === 1 &&
         !state.target.includes(action.guess)
       ) {
-        console.log("2");
         return {
           ...state,
           turn: state.turn - 1,
@@ -138,7 +125,6 @@ export const gameUpdater = (
         action.guess.length === state.target.length &&
         action.guess !== state.target
       ) {
-        console.log("2");
         return {
           ...state,
           turn: state.turn - 1,
@@ -148,11 +134,10 @@ export const gameUpdater = (
           ),
         };
       } else {
-        console.log("WORLD");
         return {
           ...state,
           log: addLog(
-            `user ${action.user.id} guessed ${action.guess}`,
+            `user ${action.user.id} guessed ${action.guess}, letter is correct`,
             state.log
           ),
         };
