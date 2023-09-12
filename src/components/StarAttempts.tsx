@@ -23,7 +23,7 @@ const StarRating: React.FC<StarRatingProps> = ({
         height={height}
         width={width}
         alt="star depicts rest of attempts"
-        className="inline"
+        className="inline mr-2"
       />
     );
   }
@@ -34,7 +34,7 @@ const StarRating: React.FC<StarRatingProps> = ({
         height={height}
         width={width}
         alt="star depicts lost attempts"
-        className="inline"
+        className="inline mr-2"
       />
     );
   }
