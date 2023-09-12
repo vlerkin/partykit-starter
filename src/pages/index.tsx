@@ -9,7 +9,7 @@ const queryParamsValidator = z.object({
   roomId: z.string().min(1),
 });
 
-interface GameSetup {
+export interface GameSetup {
   username: string | null;
   roomId: string | null;
   showGame: boolean;
@@ -60,7 +60,11 @@ export default function Home() {
   if (setup !== null && setup.showGame && setup.roomId && setup.username) {
     return (
       <Layout>
-        <Game roomId={setup.roomId} username={setup.username} />
+        <Game
+          setSetup={setSetup}
+          roomId={setup.roomId}
+          username={setup.username}
+        />
       </Layout>
     );
   }

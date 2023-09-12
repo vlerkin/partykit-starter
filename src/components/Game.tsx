@@ -3,16 +3,19 @@ import { useState, useEffect } from "react";
 import { useGameRoom } from "@/hooks/useGameRoom";
 import Word from "./Word";
 import StarRating from "./StarAttempts";
+import { useRouter } from "next/router";
+import { GameSetup } from "@/pages";
 
 interface GameProps {
   username: string;
   roomId: string;
+  setSetup: (parameter: GameSetup) => void;
 }
 
-const Game = ({ username, roomId }: GameProps) => {
+const Game = ({ username, roomId, setSetup }: GameProps) => {
   const { gameState, dispatch } = useGameRoom(username, roomId);
   const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
-
+  const router = useRouter();
   const targetWord = gameState?.target;
   const attempts = gameState?.turn;
 
@@ -130,7 +133,7 @@ const Game = ({ username, roomId }: GameProps) => {
         <h2 className="text-lg">
           Players in room <span className="font-bold">{roomId}</span>
         </h2>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 justify-between">
           {gameState.users.map((user) => {
             return (
               <p
@@ -141,6 +144,18 @@ const Game = ({ username, roomId }: GameProps) => {
               </p>
             );
           })}
+          <button
+            className="bg-black text-white py-[2px] px-2"
+            onClick={() =>
+              setSetup({
+                username: null,
+                roomId: null,
+                showGame: false,
+              })
+            }
+          >
+            Quit the room
+          </button>
         </div>
       </section>
     </>
