@@ -52,12 +52,15 @@ const Game = ({ username, roomId }: GameProps) => {
         🎲 Guess the letter or the whole word!
       </h1>
       <Word gameState={gameState} guess={accumulatedGuess} />
-      <StarRating
-        attempts={gameState.turn}
-        maxAttempts={5}
-        height={20}
-        width={20}
-      />
+      <div>
+        <p>Remaining attempts</p>
+        <StarRating
+          attempts={gameState.turn}
+          maxAttempts={5}
+          height={20}
+          width={20}
+        />
+      </div>
       <section>
         <form
           className="flex flex-col gap-4 py-6 items-center"
