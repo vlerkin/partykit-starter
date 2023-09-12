@@ -41,7 +41,7 @@ const Game = ({ username, roomId }: GameProps) => {
   const handleInputSubmitClick = () => {
     console.log("GUESS", guess);
     console.log("ACCUMULATED BEFORE", accumulatedGuess);
-    if (guess.length === 1 || guess.length === targetWord?.length) {
+    if (guess.length === 1 || guess === targetWord) {
       setAccumulatedGuess(accumulatedGuess.concat(guess));
     }
   };
