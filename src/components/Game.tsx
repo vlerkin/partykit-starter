@@ -45,6 +45,7 @@ const Game = ({ username, roomId }: GameProps) => {
       setAccumulatedGuess(accumulatedGuess.concat(guess));
     }
   };
+
   console.log("ACCUMULATED AFTER", accumulatedGuess);
   return (
     <>
@@ -58,6 +59,28 @@ const Game = ({ username, roomId }: GameProps) => {
         height={20}
         width={20}
       />
+      <div className="w-1/4 h-1/4 m-2">
+        <h1 className="my-4">Guessed letters</h1>
+        <div className=" flex flex-row">
+          {" "}
+          {accumulatedGuess
+            .split("")
+            .filter((l) => {
+              return !targetWord?.includes(l);
+            })
+            .map((letter, index) => {
+              return (
+                <li
+                  key={index}
+                  className="list-none border-2 border-solid mr-4 p-2 px-4 break-words"
+                >
+                  {letter}
+                </li>
+              );
+            })}
+        </div>
+      </div>
+
       <section>
         <form
           className="flex flex-col gap-4 py-6 items-center"
