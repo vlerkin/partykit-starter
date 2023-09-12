@@ -53,12 +53,18 @@ const Game = ({ username, roomId }: GameProps) => {
         🎲 Guess the letter or the whole word!
       </h1>
       <Word gameState={gameState} guess={accumulatedGuess} />
-      <StarRating
-        attempts={gameState.turn}
-        maxAttempts={5}
-        height={20}
-        width={20}
-      />
+      
+      <div>
+        <p>Remaining attempts</p>
+        <StarRating
+          attempts={gameState.turn}
+          maxAttempts={5}
+          height={20}
+          width={20}
+        />
+      </div>
+
+
       <div className="w-1/4 h-1/4 m-2">
         <h1 className="my-4">Guessed letters</h1>
         <div className=" flex flex-row">
@@ -80,6 +86,7 @@ const Game = ({ username, roomId }: GameProps) => {
             })}
         </div>
       </div>
+
 
       <section>
         <form
