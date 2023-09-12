@@ -93,10 +93,6 @@ export const gameUpdater = (
       if (action.guess === state.target) {
         return {
           ...state,
-          // target:
-          //   hangmanGame[
-          //     Math.floor(Math.random() * 30) as keyof typeof hangmanGame
-          //   ],
           log: addLog(
             `user ${action.user.id} guessed ${action.guess} and .won!👑`,
             state.log
@@ -107,7 +103,7 @@ export const gameUpdater = (
           ...state,
           turn: state.turn - 1,
         };
-      } else if (state.turn == 0) {
+      } else if (state.turn === 0) {
         return {
           ...state,
           log: addLog(
@@ -116,9 +112,10 @@ export const gameUpdater = (
           ),
         };
       } else if (
-        action.guess.length != 1 ||
-        action.guess.length != state.target.length
+        action.guess.length !== 1 &&
+        action.guess.length !== state.target.length
       ) {
+        console.log("GUESS FROM USER", action.guess.length, action.guess);
         return {
           ...state,
           log: addLog(

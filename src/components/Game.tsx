@@ -40,12 +40,12 @@ const Game = ({ username, roomId }: GameProps) => {
   };
   const handleInputSubmitClick = () => {
     console.log("GUESS", guess);
-    console.log("ACCUMULATED", accumulatedGuess);
+    console.log("ACCUMULATED BEFORE", accumulatedGuess);
     if (guess.length === 1 || guess.length === targetWord?.length) {
       setAccumulatedGuess(accumulatedGuess.concat(guess));
     }
   };
-
+  console.log("ACCUMULATED AFTER", accumulatedGuess);
   return (
     <>
       <h1 className="text-2xl border-b border-yellow-400 text-center relative">
@@ -57,7 +57,6 @@ const Game = ({ username, roomId }: GameProps) => {
         maxAttempts={5}
         height={20}
         width={20}
-        className="flex flex-row"
       />
       <section>
         <form
