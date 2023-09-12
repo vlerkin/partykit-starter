@@ -5,6 +5,7 @@ import Word from "./Word";
 import StarRating from "./StarAttempts";
 import { useRouter } from "next/router";
 import { GameSetup } from "@/pages";
+import { initialGame } from "../../game/logic";
 
 interface GameProps {
   username: string;
@@ -15,9 +16,7 @@ interface GameProps {
 const Game = ({ username, roomId, setSetup }: GameProps) => {
   const { gameState, dispatch } = useGameRoom(username, roomId);
   const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
-  const router = useRouter();
   const targetWord = gameState?.target;
-  const attempts = gameState?.turn;
 
   // Local state to use for the UI
   const [guess, setGuess] = useState<string>("");
@@ -144,18 +143,26 @@ const Game = ({ username, roomId, setSetup }: GameProps) => {
               </p>
             );
           })}
-          <button
-            className="bg-black text-white py-[2px] px-2"
-            onClick={() =>
-              setSetup({
-                username: null,
-                roomId: null,
-                showGame: false,
-              })
-            }
-          >
-            Quit the room
-          </button>
+          <div>
+            <button
+              className="bg-black text-white py-[2px] px-2 mr-2"
+              onClick={() => initialGame()}
+            >
+              Start new game
+            </button>
+            <button
+              className="bg-black text-white py-[2px] px-2"
+              onClick={() =>
+                setSetup({
+                  username: null,
+                  roomId: null,
+                  showGame: false,
+                })
+              }
+            >
+              Quit the room
+            </button>
+          </div>
         </div>
       </section>
     </>
