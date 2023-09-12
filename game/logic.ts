@@ -89,25 +89,14 @@ export const gameUpdater = (
     //   }
 
     case "guess":
+      console.log("HELLO");
       // If User guesses the target word
       if (action.guess === state.target) {
+        console.log("1");
         return {
           ...state,
           log: addLog(
             `user ${action.user.id} guessed ${action.guess} and .won!👑`,
-            state.log
-          ),
-        };
-      } else if (!state.target.includes(action.guess)) {
-        return {
-          ...state,
-          turn: state.turn - 1,
-        };
-      } else if (state.turn === 0) {
-        return {
-          ...state,
-          log: addLog(
-            `user ${action.user.id} used the last attempt, you all LOST`,
             state.log
           ),
         };
@@ -123,7 +112,27 @@ export const gameUpdater = (
             state.log
           ),
         };
+      } else if (state.turn === 0) {
+        console.log("3");
+        return {
+          ...state,
+          log: addLog(
+            `user ${action.user.id} used the last attempt, you all LOST`,
+            state.log
+          ),
+        };
+      } else if (
+        (action.guess.length === 1 ||
+          action.guess.length === state.target.length) &&
+        !state.target.includes(action.guess)
+      ) {
+        console.log("2");
+        return {
+          ...state,
+          turn: state.turn - 1,
+        };
       } else {
+        console.log("WORLD");
         return {
           ...state,
           log: addLog(

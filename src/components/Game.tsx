@@ -35,7 +35,7 @@ const Game = ({ username, roomId }: GameProps) => {
     event.preventDefault();
     // Dispatch allows you to send an action!
     // Modify /game/logic.ts to change what actions you can send
-    // console.log({ type: "guess", guess: guess });
+    console.log({ type: "guess", guess: guess });
     dispatch({ type: "guess", guess: guess });
   };
   const handleInputSubmitClick = () => {
