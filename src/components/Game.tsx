@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import { useGameRoom } from "@/hooks/useGameRoom";
 import Word from "./Word";
 import StarRating from "./StarAttempts";
-import { useRouter } from "next/router";
 import { GameSetup } from "@/pages";
-import { initialGame } from "../../game/logic";
 
 interface GameProps {
   username: string;
@@ -17,6 +15,11 @@ const Game = ({ username, roomId, setSetup }: GameProps) => {
   const { gameState, dispatch } = useGameRoom(username, roomId);
   const [accumulatedGuess, setAccumulatedGuess] = useState<string>("");
   const targetWord = gameState?.target;
+
+  useEffect(() => {
+    setAccumulatedGuess("");
+    setGuess("");
+  }, [targetWord]);
 
   // Local state to use for the UI
   const [guess, setGuess] = useState<string>("");
@@ -47,7 +50,9 @@ const Game = ({ username, roomId, setSetup }: GameProps) => {
       setAccumulatedGuess(accumulatedGuess.concat(guess));
     }
   };
-
+  const startNewGameHandle = () => {
+    dispatch({ type: "reset" });
+  };
   console.log("ACCUMULATED AFTER", accumulatedGuess);
   return (
     <>
@@ -143,7 +148,7 @@ const Game = ({ username, roomId, setSetup }: GameProps) => {
               </p>
             );
           })}
-
+          <button onClick={startNewGameHandle}>Start new game</button>
           <button
             className="bg-black text-white py-[2px] px-2"
             onClick={() =>

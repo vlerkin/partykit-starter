@@ -53,7 +53,7 @@ export const initialGame = () => ({
 });
 
 // Here are all the actions we can dispatch for a user
-type GameAction = { type: "guess"; guess: string };
+type GameAction = { type: "guess"; guess: string } | { type: "reset" };
 
 export const gameUpdater = (
   action: ServerAction,
@@ -73,7 +73,14 @@ export const gameUpdater = (
         users: [...state.users, action.user],
         log: addLog(`user ${action.user.id} joined 🎉`, state.log),
       };
-
+    case "reset":
+      const newGame = initialGame();
+      return {
+        ...state,
+        log: newGame.log,
+        target: newGame.target,
+        turn: newGame.turn,
+      };
     case "UserExit":
       return {
         ...state,
