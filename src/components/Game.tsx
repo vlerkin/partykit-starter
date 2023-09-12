@@ -39,7 +39,11 @@ const Game = ({ username, roomId }: GameProps) => {
     dispatch({ type: "guess", guess: guess });
   };
   const handleInputSubmitClick = () => {
-    setAccumulatedGuess(accumulatedGuess.concat(guess));
+    console.log("GUESS", guess);
+    console.log("ACCUMULATED", accumulatedGuess);
+    if (guess.length === 1 || guess.length === targetWord?.length) {
+      setAccumulatedGuess(accumulatedGuess.concat(guess));
+    }
   };
 
   return (
