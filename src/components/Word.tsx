@@ -11,11 +11,11 @@ function Word({ gameState, guess }: { gameState: GameState; guess: string }) {
 
   const wordArray = word.split("");
   return (
-    <div className="flex border-2 border-solid border-black justify-center my-8">
+    <div className="flex justify-center my-8">
       {wordArray.map((letter, index) => (
-        <li
+        <div
           key={index}
-          className="border-2 border-solid border-black p-4 list-none "
+          className="h-12 w-8 flex justify-center items-center border-[1px] mr-[1px] border-solid border-black p-4 list-none "
         >
           <span
             className={`${guess.includes(letter) ? "visible" : "invisible"}`}
@@ -23,7 +23,7 @@ function Word({ gameState, guess }: { gameState: GameState; guess: string }) {
             {" "}
             {letter}
           </span>
-        </li>
+        </div>
       ))}
 
       <form></form>

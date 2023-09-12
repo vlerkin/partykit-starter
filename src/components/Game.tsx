@@ -53,7 +53,7 @@ const Game = ({ username, roomId }: GameProps) => {
         🎲 Guess the letter or the whole word!
       </h1>
       <Word gameState={gameState} guess={accumulatedGuess} />
-      
+
       <div>
         <p>Remaining attempts</p>
         <StarRating
@@ -63,9 +63,7 @@ const Game = ({ username, roomId }: GameProps) => {
           width={20}
         />
       </div>
-
-
-      <div className="w-1/4 h-1/4 m-2">
+      <div className="w-1/4 my-2">
         <h1 className="my-4">Guessed letters</h1>
         <div className=" flex flex-row">
           {" "}
@@ -76,18 +74,16 @@ const Game = ({ username, roomId }: GameProps) => {
             })
             .map((letter, index) => {
               return (
-                <li
+                <span
                   key={index}
-                  className="list-none border-2 border-solid mr-4 p-2 px-4 break-words"
+                  className="h-10 w-6 text-center list-none border-[1px] border-solid mr-4 p-2 px-4 break-words justify-center items-center flex"
                 >
                   {letter}
-                </li>
+                </span>
               );
             })}
         </div>
       </div>
-
-
       <section>
         <form
           className="flex flex-col gap-4 py-6 items-center"
