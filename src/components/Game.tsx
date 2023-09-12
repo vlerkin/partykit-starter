@@ -69,8 +69,11 @@ const Game = ({ username, roomId }: GameProps) => {
           {" "}
           {accumulatedGuess
             .split("")
-            .filter((l) => {
-              return !targetWord?.includes(l);
+            .filter((l, index) => {
+              return (
+                accumulatedGuess.indexOf(l) === index &&
+                !targetWord?.includes(l)
+              );
             })
             .map((letter, index) => {
               return (
@@ -93,15 +96,17 @@ const Game = ({ username, roomId }: GameProps) => {
             htmlFor="guess"
             className="text-7xl font-bold text-stone-50 bg-black rounded p-2 text-"
           >
-            {guess}
+            {guess.toLowerCase().trim()}
           </label>
           <input
             type="text"
             name="guess"
             id="guess"
             className="opacity-70 hover:opacity-100 accent-yellow-400"
-            onChange={(e) => setGuess(e.currentTarget.value)}
-            value={guess}
+            onChange={(e) =>
+              setGuess(e.currentTarget.value.toLowerCase().trim())
+            }
+            value={guess.toLowerCase().trim()}
           />
           <button
             onClick={handleInputSubmitClick}
