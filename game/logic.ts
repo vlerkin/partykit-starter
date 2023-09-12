@@ -122,14 +122,30 @@ export const gameUpdater = (
           ),
         };
       } else if (
-        (action.guess.length === 1 ||
-          action.guess.length === state.target.length) &&
+        action.guess.length === 1 &&
         !state.target.includes(action.guess)
       ) {
         console.log("2");
         return {
           ...state,
           turn: state.turn - 1,
+          log: addLog(
+            `user ${action.user.id} guessed ${action.guess}, nice try but this letter is wrong`,
+            state.log
+          ),
+        };
+      } else if (
+        action.guess.length === state.target.length &&
+        action.guess !== state.target
+      ) {
+        console.log("2");
+        return {
+          ...state,
+          turn: state.turn - 1,
+          log: addLog(
+            `user ${action.user.id} guessed ${action.guess}, nice try but the word is wrong`,
+            state.log
+          ),
         };
       } else {
         console.log("WORLD");
